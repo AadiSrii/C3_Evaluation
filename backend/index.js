@@ -14,6 +14,13 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.get('/', (req, res) => {
+  res.send('Backend server is running');
+});
+app.get('/health', (req, res) => {
+  res.send({ status: 'UP' });
+});
+
 // MongoDB connection setup
 mongoose.connect('mongodb://127.0.0.1:27017/pdfGenerator')
   .then(() => {
