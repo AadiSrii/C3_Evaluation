@@ -15,15 +15,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // MongoDB connection setup
-mongoose.connect('mongodb://localhost:27017/pdfGenerator', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-const db = mongoose.connection;
-db.once('open', () => {
-  console.log('Connected to MongoDB');
-});
+mongoose.connect('mongodb://127.0.0.1:27017/pdfGenerator')
+  .then(() => {
+    console.log('Connected to MongoDB');
+  })
+  .catch(err => {
+    console.error('Error connecting to MongoDB', err);
+  });
 
 // Multer setup for file uploads
 const storage = multer.diskStorage({
